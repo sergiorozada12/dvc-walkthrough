@@ -4,3 +4,4 @@
 * ```dvc remote add -d myremote gdrive://1x7syfySLrKBpOCnnW6WXzzTaFX5ElVAW```
 * ```dvc push```
 * ```dvc pull```
+* ```dvc checkout```
