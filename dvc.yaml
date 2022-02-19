@@ -1,0 +1,10 @@
+stages:
+  prepare:
+    cmd: python 2_prepare.py
+    deps:
+    - 2_prepare.py
+    - data/wine.csv
+    params:
+    - prepare.split
+    outs:
+    - data/prepared

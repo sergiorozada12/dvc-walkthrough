@@ -1,0 +1,19 @@
+schema: '2.0'
+stages:
+  prepare:
+    cmd: python 2_prepare.py
+    deps:
+    - path: 2_prepare.py
+      md5: 7f2e8ecb9ee75e3714cf695dd5c3fc01
+      size: 364
+    - path: data/wine.csv
+      md5: d9e5483a913470e5900c4b0989b9a9be
+      size: 10948
+    params:
+      params.yaml:
+        prepare.split: 0.8
+    outs:
+    - path: data/prepared
+      md5: f73a9c1a756ba8710ce9c78ba7487f0e.dir
+      size: 12258
+      nfiles: 2
