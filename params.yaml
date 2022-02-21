@@ -3,4 +3,4 @@ prepare:
 
 train:
   seed: 0
-  max_iter: 10
+  max_iter: 100
