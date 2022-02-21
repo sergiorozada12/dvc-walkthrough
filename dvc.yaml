@@ -19,3 +19,17 @@ stages:
     outs:
     - data/metrics
     - models/trained
+  evaluate:
+    cmd: python 4_evaluate.py
+    deps:
+    - 4_evaluate.py
+    - data/prepared/wine_test.csv
+    - models/trained/model.joblib
+    metrics:
+    - data/metrics_threshold/scores.json:
+        cache: false
+    plots:
+    - data/metrics_threshold/metrics.json:
+        cache: false
+        x: recall
+        y: precision

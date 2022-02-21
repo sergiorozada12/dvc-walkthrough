@@ -41,3 +41,22 @@ stages:
       md5: 469bf986f4664333dec9ac005814d114.dir
       size: 1590
       nfiles: 1
+  evaluate:
+    cmd: python 4_evaluate.py
+    deps:
+    - path: 4_evaluate.py
+      md5: f683299db78be1303f23d7606347b8ee
+      size: 1130
+    - path: data/prepared/wine_test.csv
+      md5: 150386b2a8b079add132df687cb87f20
+      size: 2399
+    - path: models/trained/model.joblib
+      md5: f05902782a20ff9ec5ed46ec4e79a9dd
+      size: 1590
+    outs:
+    - path: data/metrics_threshold/metrics.json
+      md5: fe983833666e46c416a82cd664acac18
+      size: 4760
+    - path: data/metrics_threshold/scores.json
+      md5: be352b4ef53bfc56b1de8803a7a7b82d
+      size: 50
