@@ -4,8 +4,8 @@ stages:
     cmd: python 2_prepare.py
     deps:
     - path: 2_prepare.py
-      md5: 2b49d423b9ac73b3ac5e3b6b06d0f02f
-      size: 390
+      md5: 8fc6a9c7c3ae707f6d3919fae19b36de
+      size: 428
     - path: data/wine.csv
       md5: d9e5483a913470e5900c4b0989b9a9be
       size: 10948
@@ -14,49 +14,50 @@ stages:
         prepare.split: 0.8
     outs:
     - path: data/prepared
-      md5: 8ad9b8654e742f823741afd395588636.dir
+      md5: b4b66bfb4188f7a659c2146abf11fab8.dir
       size: 11650
       nfiles: 2
   train:
     cmd: python 3_train_pipeline.py
     deps:
     - path: 3_train_pipeline.py
-      md5: 31fc06a2d7c1bcc7d219ac78d1b28ba3
-      size: 1088
+      md5: 9bc2638c01003271498d8dbf4f74477e
+      size: 1121
     - path: data/prepared/wine_test.csv
-      md5: 150386b2a8b079add132df687cb87f20
-      size: 2399
+      md5: 15a971d441175ff0a624585051551cf7
+      size: 2418
     - path: data/prepared/wine_train.csv
-      md5: 78d69ad9371a834e27963457281aeade
-      size: 9251
+      md5: bc4f4830828ba8067f963f5eab3eec8e
+      size: 9232
     params:
       params.yaml:
+        train.max_iter: 10
         train.seed: 0
     outs:
     - path: data/metrics
-      md5: 3196d5dfdcdec415962c53a51c31f466.dir
-      size: 50
+      md5: 4e06fee25a5e40c54a3ff25b4c54300d.dir
+      size: 53
       nfiles: 1
     - path: models/trained
-      md5: 469bf986f4664333dec9ac005814d114.dir
-      size: 1590
+      md5: 06b441ca0827f3e9255afb80041f2ecb.dir
+      size: 1589
       nfiles: 1
   evaluate:
     cmd: python 4_evaluate.py
     deps:
     - path: 4_evaluate.py
-      md5: f683299db78be1303f23d7606347b8ee
-      size: 1130
+      md5: ea7cf40b22a36707a39851c7e9b3281e
+      size: 1191
     - path: data/prepared/wine_test.csv
-      md5: 150386b2a8b079add132df687cb87f20
-      size: 2399
+      md5: 15a971d441175ff0a624585051551cf7
+      size: 2418
     - path: models/trained/model.joblib
-      md5: f05902782a20ff9ec5ed46ec4e79a9dd
-      size: 1590
+      md5: eacb043491a1f66fd8949922cb9420b0
+      size: 1589
     outs:
     - path: data/metrics_threshold/metrics.json
-      md5: fe983833666e46c416a82cd664acac18
-      size: 4760
+      md5: 86b9e9b06ecf32033766a2b22f67ac66
+      size: 3755
     - path: data/metrics_threshold/scores.json
-      md5: be352b4ef53bfc56b1de8803a7a7b82d
-      size: 50
+      md5: 966761231889ccc9d07d474b1ef3df3e
+      size: 95

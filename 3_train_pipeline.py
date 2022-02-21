@@ -9,6 +9,7 @@ from sklearn.metrics import accuracy_score, recall_score, precision_score
 
 params = yaml.safe_load(open("params.yaml"))["train"]
 seed = params["seed"]
+max_iter = params["max_iter"]
 
 os.makedirs(os.path.join("data", "metrics"), exist_ok=True)
 os.makedirs(os.path.join("models", "trained"), exist_ok=True)
@@ -23,7 +24,7 @@ X_test = df_test[df_test.columns[1:]]
 y_test = df_test[df_test.columns[0]]
 
 
-lr = LogisticRegression(random_state=seed, max_iter=10000).fit(X_train, y_train)
+lr = LogisticRegression(random_state=seed, max_iter=max_iter).fit(X_train, y_train)
 
 y_pred = lr.predict(X_test)
 acc = accuracy_score(y_test, y_pred)

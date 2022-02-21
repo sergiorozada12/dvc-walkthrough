@@ -15,6 +15,7 @@ stages:
     - data/prepared/wine_test.csv
     - data/prepared/wine_train.csv
     params:
+    - train.max_iter
     - train.seed
     outs:
     - data/metrics
