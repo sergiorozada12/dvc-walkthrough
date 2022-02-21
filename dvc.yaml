@@ -8,3 +8,14 @@ stages:
     - prepare.split
     outs:
     - data/prepared
+  train:
+    cmd: python 3_train_pipeline.py
+    deps:
+    - 3_train_pipeline.py
+    - data/prepared/wine_test.csv
+    - data/prepared/wine_train.csv
+    params:
+    - train.seed
+    outs:
+    - data/metrics
+    - models/trained

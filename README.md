@@ -11,3 +11,4 @@
 * ```dvc get https://github.com/sergiorozada12/dvc-walkthrough models/model.joblib```
 * ```dvc import https://github.com/sergiorozada12/dvc-walkthrough models/model.joblib```
 * ```dvc run -n prepare -p prepare.split -d 2_prepare.py -d data/wine.csv -o data/prepared python 2_prepare.py```
+* ```dvc run -n train -p train.seed -d 3_train_pipeline.py -d data/prepared/wine_train.csv -d data/prepared/wine_test.csv -o data/metrics -o models/trained python 3_train_pipeline.py```

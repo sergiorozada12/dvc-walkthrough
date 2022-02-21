@@ -17,3 +17,27 @@ stages:
       md5: f73a9c1a756ba8710ce9c78ba7487f0e.dir
       size: 12258
       nfiles: 2
+  train:
+    cmd: python 3_train_pipeline.py
+    deps:
+    - path: 3_train_pipeline.py
+      md5: d3ad6e61e0bb73e806185ac2414c09f6
+      size: 1087
+    - path: data/prepared/wine_test.csv
+      md5: dfe0352bffee89c16f48a45ec81f69e6
+      size: 2544
+    - path: data/prepared/wine_train.csv
+      md5: e9de25524fc807b4288969a9d35d6141
+      size: 9714
+    params:
+      params.yaml:
+        train.seed: 0
+    outs:
+    - path: data/metrics
+      md5: 4daf05e6da8a67b73017603d79feef8d.dir
+      size: 50
+      nfiles: 1
+    - path: models/trained
+      md5: 1b6803c00f6f2765bf897a6603fedca2.dir
+      size: 19545
+      nfiles: 1
