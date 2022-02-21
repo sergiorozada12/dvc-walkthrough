@@ -1,63 +1,63 @@
 schema: '2.0'
 stages:
   prepare:
-    cmd: python 2_prepare.py
+    cmd: python src/pipeline/prepare.py
     deps:
-    - path: 2_prepare.py
-      md5: 8fc6a9c7c3ae707f6d3919fae19b36de
-      size: 428
     - path: data/wine.csv
       md5: d9e5483a913470e5900c4b0989b9a9be
       size: 10948
+    - path: src/pipeline/prepare.py
+      md5: 8fc6a9c7c3ae707f6d3919fae19b36de
+      size: 428
     params:
       params.yaml:
         prepare.split: 0.8
     outs:
     - path: data/prepared
-      md5: b4b66bfb4188f7a659c2146abf11fab8.dir
+      md5: 956668fd845230564031a81c9ed67816.dir
       size: 11650
       nfiles: 2
   train:
-    cmd: python 3_train_pipeline.py
+    cmd: python src/pipeline/train.py
     deps:
-    - path: 3_train_pipeline.py
-      md5: 9bc2638c01003271498d8dbf4f74477e
-      size: 1121
     - path: data/prepared/wine_test.csv
-      md5: 15a971d441175ff0a624585051551cf7
-      size: 2418
+      md5: 631b99f0e9d761ff30fe78510977309e
+      size: 2404
     - path: data/prepared/wine_train.csv
-      md5: bc4f4830828ba8067f963f5eab3eec8e
-      size: 9232
+      md5: 922c780bc0b171a369a3757eac292309
+      size: 9246
+    - path: src/pipeline/train.py
+      md5: 0e87acf50daf7969f7a76740faf8cd70
+      size: 1122
     params:
       params.yaml:
         train.max_iter: 100
         train.seed: 0
     outs:
-    - path: data/metrics
-      md5: 1b4278a0fd341f922ce28278953fe72f.dir
-      size: 95
+    - path: metrics/train
+      md5: 3196d5dfdcdec415962c53a51c31f466.dir
+      size: 50
       nfiles: 1
     - path: models/trained
-      md5: 25aa6f3b18b5f208a913a04c5108479f.dir
+      md5: eb3aa64e68e6ab029859c992fc794105.dir
       size: 1589
       nfiles: 1
   evaluate:
-    cmd: python 4_evaluate.py
+    cmd: python src/pipeline/evaluate.py
     deps:
-    - path: 4_evaluate.py
-      md5: ea7cf40b22a36707a39851c7e9b3281e
-      size: 1191
     - path: data/prepared/wine_test.csv
-      md5: 15a971d441175ff0a624585051551cf7
-      size: 2418
+      md5: 631b99f0e9d761ff30fe78510977309e
+      size: 2404
     - path: models/trained/model.joblib
-      md5: 6987c15ce6a0d815819eba3026f9cc97
+      md5: d7c2e5ce38f536e2ae70ef911bd6985a
       size: 1589
+    - path: src/pipeline/evaluate.py
+      md5: 00604c98ac674ccca670a412dcc07aea
+      size: 1161
     outs:
-    - path: data/metrics_threshold/metrics.json
-      md5: 8ecf29122f7f499bc137b6272538e302
-      size: 814
-    - path: data/metrics_threshold/scores.json
+    - path: metrics/test/metrics.json
+      md5: 55431001a3cac7550fe6c9a6d708536e
+      size: 1241
+    - path: metrics/test/scores.json
       md5: 8ecdf08a91b4ceeb03965e089aedc90a
       size: 50

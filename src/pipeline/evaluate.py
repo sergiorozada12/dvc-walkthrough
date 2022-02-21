@@ -5,7 +5,7 @@ from sklearn import metrics
 import math
 import os
 
-os.makedirs(os.path.join("data", "metrics_threshold"), exist_ok=True)
+os.makedirs(os.path.join("metrics", "test"), exist_ok=True)
 
 model = load("models/trained/model.joblib")
 
@@ -22,13 +22,13 @@ pre_avg = metrics.precision_score(y_test, y_pred_labels, average='micro')
 rec_avg = metrics.recall_score(y_test, y_pred_labels, average='micro')
 
 # General metrics
-with open('data/metrics_threshold/scores.json', 'w') as f:
+with open('metrics/test/scores.json', 'w') as f:
     json.dump({"accuracy": acc_avg, "precision": pre_avg, "recall": rec_avg}, f)
 
 # Metrics by threshohld
 nth_point = math.ceil(len(th)/1000)
 test_results = list(zip(pre, rec, th))[::nth_point]
-with open("data/metrics_threshold/metrics.json", "w") as f:
+with open("metrics/test/metrics.json", "w") as f:
     json.dump(
         {"prc": [{"precision": p, "recall": r, "threshold": t} for p, r, t in test_results]},
         f,

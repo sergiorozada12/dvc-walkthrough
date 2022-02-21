@@ -11,7 +11,7 @@ params = yaml.safe_load(open("params.yaml"))["train"]
 seed = params["seed"]
 max_iter = params["max_iter"]
 
-os.makedirs(os.path.join("data", "metrics"), exist_ok=True)
+os.makedirs(os.path.join("metrics", "train"), exist_ok=True)
 os.makedirs(os.path.join("models", "trained"), exist_ok=True)
 
 df_train = pd.read_csv("data/prepared/wine_train.csv")
@@ -23,7 +23,6 @@ y_train = df_train[df_train.columns[0]]
 X_test = df_test[df_test.columns[1:]]
 y_test = df_test[df_test.columns[0]]
 
-
 lr = LogisticRegression(random_state=seed, max_iter=max_iter).fit(X_train, y_train)
 
 y_pred = lr.predict(X_test)
@@ -32,5 +31,5 @@ pre = precision_score(y_test, y_pred, average='micro')
 rec = recall_score(y_test, y_pred, average='micro')
 
 dump(lr, 'models/trained/model.joblib')
-with open('data/metrics/metrics.json', 'w') as f:
+with open('metrics/train/metrics.json', 'w') as f:
     json.dump({"accuracy": acc, "precision": pre, "recall": rec}, f)

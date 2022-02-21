@@ -1,36 +1,34 @@
 stages:
   prepare:
-    cmd: python 2_prepare.py
+    cmd: python src/pipeline/prepare.py
     deps:
-    - 2_prepare.py
     - data/wine.csv
+    - src/pipeline/prepare.py
     params:
     - prepare.split
     outs:
     - data/prepared
   train:
-    cmd: python 3_train_pipeline.py
+    cmd: python src/pipeline/train.py
     deps:
-    - 3_train_pipeline.py
     - data/prepared/wine_test.csv
     - data/prepared/wine_train.csv
+    - src/pipeline/train.py
     params:
     - train.max_iter
     - train.seed
     outs:
-    - data/metrics
+    - metrics/train
     - models/trained
   evaluate:
-    cmd: python 4_evaluate.py
+    cmd: python src/pipeline/evaluate.py
     deps:
-    - 4_evaluate.py
     - data/prepared/wine_test.csv
     - models/trained/model.joblib
+    - src/pipeline/evaluate.py
     metrics:
-    - data/metrics_threshold/scores.json:
+    - metrics/test/scores.json:
         cache: false
     plots:
-    - data/metrics_threshold/metrics.json:
+    - metrics/test/metrics.json:
         cache: false
-        x: recall
-        y: precision
