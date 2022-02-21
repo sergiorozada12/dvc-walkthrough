@@ -4,8 +4,8 @@ stages:
     cmd: python 2_prepare.py
     deps:
     - path: 2_prepare.py
-      md5: 7f2e8ecb9ee75e3714cf695dd5c3fc01
-      size: 364
+      md5: 2b49d423b9ac73b3ac5e3b6b06d0f02f
+      size: 390
     - path: data/wine.csv
       md5: d9e5483a913470e5900c4b0989b9a9be
       size: 10948
@@ -14,30 +14,30 @@ stages:
         prepare.split: 0.8
     outs:
     - path: data/prepared
-      md5: f73a9c1a756ba8710ce9c78ba7487f0e.dir
-      size: 12258
+      md5: 8ad9b8654e742f823741afd395588636.dir
+      size: 11650
       nfiles: 2
   train:
     cmd: python 3_train_pipeline.py
     deps:
     - path: 3_train_pipeline.py
-      md5: d3ad6e61e0bb73e806185ac2414c09f6
-      size: 1087
+      md5: 31fc06a2d7c1bcc7d219ac78d1b28ba3
+      size: 1088
     - path: data/prepared/wine_test.csv
-      md5: dfe0352bffee89c16f48a45ec81f69e6
-      size: 2544
+      md5: 150386b2a8b079add132df687cb87f20
+      size: 2399
     - path: data/prepared/wine_train.csv
-      md5: e9de25524fc807b4288969a9d35d6141
-      size: 9714
+      md5: 78d69ad9371a834e27963457281aeade
+      size: 9251
     params:
       params.yaml:
         train.seed: 0
     outs:
     - path: data/metrics
-      md5: 4daf05e6da8a67b73017603d79feef8d.dir
+      md5: 3196d5dfdcdec415962c53a51c31f466.dir
       size: 50
       nfiles: 1
     - path: models/trained
-      md5: 1b6803c00f6f2765bf897a6603fedca2.dir
-      size: 19545
+      md5: 469bf986f4664333dec9ac005814d114.dir
+      size: 1590
       nfiles: 1
